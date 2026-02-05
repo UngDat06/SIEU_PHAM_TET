@@ -324,7 +324,7 @@
             text-shadow: 0 2px 4px rgba(0,0,0,0.8);
         }
 
-        /* --- 6. FINAL SCREEN & SATELLITES (CẬP NHẬT GIAO DIỆN MỚI) --- */
+        /* --- 6. FINAL SCREEN & SATELLITES --- */
         #final-screen {
             display: none; width: 100%; height: 100vh;
             background: radial-gradient(circle at center, #500000 0%, #2b0000 50%, #100000 100%);
@@ -356,50 +356,52 @@
             width: 0; height: 0; z-index: 20; display: flex; justify-content: center; align-items: center;
         }
         #final-envelope-container {
-            position: absolute; z-index: 20; width: 220px; height: 320px; perspective: 1000px;
+            position: absolute; 
+            /* Z-index cố định để các hành tinh có thể bay ra trước/sau */
+            z-index: 100; 
+            width: 220px; height: 320px; perspective: 1000px;
             opacity: 0; transform: scale(0); transition: all 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
         #final-envelope-container.show { opacity: 1; transform: scale(1); }
 
-        /* VỆ TINH: BAO LÌ XÌ NHỎ */
+        /* --- VỆ TINH: ẢNH TO RÕ (Giao diện mới) --- */
         .satellite-item {
             position: absolute;
-            width: 60px; height: 90px; /* Tỉ lệ bao lì xì */
-            background: linear-gradient(135deg, #D20000 0%, #990000 100%);
-            border: 1px solid #FFD700;
-            border-radius: 4px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
-            cursor: pointer;
-            display: flex; flex-direction: column; align-items: center;
-            transition: box-shadow 0.3s;
-            z-index: 20;
-            will-change: transform, opacity;
-        }
-
-        /* Nắp bao lì xì nhỏ */
-        .satellite-item::before {
-            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 25px;
-            background: #e60000;
-            border-bottom: 1px solid #FFD700;
-            border-radius: 0 0 50% 50% / 0 0 15px 15px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2); z-index: 2;
-        }
-
-        /* Ảnh kỷ niệm biến thành "tem" trên bao lì xì */
-        .satellite-item img {
-            width: 40px; height: 40px;
-            margin-top: 35px; /* Đẩy xuống dưới nắp */
+            /* Kích thước được set trong JS để responsive, nhưng default ở đây */
+            width: 100px; height: 100px; 
             border-radius: 50%;
-            border: 2px solid #FFD700;
-            object-fit: cover;
-            z-index: 1;
+            background: rgba(0, 0, 0, 0.3);
+            border: 3px solid rgba(255, 215, 0, 0.9);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+            
+            display: flex; justify-content: center; align-items: center;
+            /* Bỏ pointer-events để không chặn click vào lì xì nếu lỡ đè lên */
+            pointer-events: none; 
+            
+            z-index: 20;
+            transform-style: preserve-3d;
+            will-change: transform, z-index, opacity;
         }
 
-        .satellite-item.highlight {
-            transform: scale(2.5) !important;
-            z-index: 100 !important;
-            box-shadow: 0 0 30px #FFD700 !important;
-            border: 2px solid #fff !important;
+        /* Loại bỏ nắp bao lì xì cũ */
+        .satellite-item::before { content: none; }
+
+        /* Vòng xoay trang trí nhẹ */
+        .satellite-item::after {
+            content: ''; position: absolute; 
+            top: -8px; left: -8px; right: -8px; bottom: -8px;
+            border-radius: 50%;
+            border: 1px dashed rgba(255, 215, 0, 0.4);
+            animation: spinSatelliteRing 20s linear infinite;
+        }
+        @keyframes spinSatelliteRing { from {transform: rotate(0deg);} to {transform: rotate(360deg);} }
+
+        /* Ảnh bên trong to rõ */
+        .satellite-item img {
+            width: 100%; height: 100%;
+            border-radius: 50%; 
+            object-fit: cover;
+            z-index: 2;
         }
 
         .final-title-text {
@@ -733,7 +735,8 @@
 
         // Biến toàn cục
         let currentImages = []; 
-        const isMobile = window.innerWidth < 768;
+        let isMobile = window.innerWidth < 768;
+        window.addEventListener('resize', () => { isMobile = window.innerWidth < 768; });
 
         const countdownEl = document.getElementById('countdown');
         const countdownScreen = document.getElementById('countdown-screen');
@@ -1054,68 +1057,81 @@
             }, 2500);
         }
 
-        /* --- FINAL SCREEN --- */
+        /* --- FINAL SCREEN (LOGIC MỚI - ẢNH TO BAY QUANH LÌ XÌ) --- */
         function showFinalScreen() {
             slideScreen.style.display = 'none';
             finalScreen.style.display = 'block';
             setTimeout(() => { document.getElementById('final-envelope-container').classList.add('show'); }, 500);
 
-            const total = currentImages.length; 
-            const radiusX = isMobile ? 165 : 350; const radiusY = isMobile ? 70 : 130;
-            const angleStep = (2 * Math.PI) / total;
-            let baseAngle = 0; const satellites = []; 
+            const total = currentImages.length;
             
-            // --- CẬP NHẬT: TẠO VỆ TINH DẠNG BAO LÌ XÌ NHỎ ---
+            // Bán kính rộng hơn để ảnh to không che lì xì
+            const radiusX = isMobile ? window.innerWidth * 0.45 : 500; 
+            const radiusY = isMobile ? 80 : 150; 
+            
+            const angleStep = (2 * Math.PI) / total;
+            let baseAngle = 0;
+            const satellites = []; 
+
+            // Xóa vệ tinh cũ
+            const oldSats = document.querySelectorAll('.satellite-item');
+            oldSats.forEach(el => el.remove());
+
+            // TẠO VỆ TINH
             currentImages.forEach((data, i) => {
                 const div = document.createElement('div');
                 div.className = 'satellite-item';
-                div.innerHTML = `<img src="${data.url}" alt="Memories">`;
+                div.innerHTML = `<img src="${data.url}" alt="Ky niem">`;
                 
-                // Định vị trung tâm
-                const sizeW = 60; const sizeH = 90;
+                // Kích thước ảnh to (160px desktop, 100px mobile)
+                const sizeW = isMobile ? 100 : 160; 
+                
+                div.style.width = sizeW + 'px';
+                div.style.height = sizeW + 'px';
+                
+                // Căn giữa điểm neo
                 div.style.marginLeft = (-sizeW/2) + 'px'; 
-                div.style.marginTop = (-sizeH/2) + 'px';
+                div.style.marginTop = (-sizeW/2) + 'px';
                 
-                div.addEventListener('click', (e) => {
-                    e.stopPropagation(); 
-                    div.classList.toggle('highlight');
-                    
-                    if(div.classList.contains('highlight')) {
-                        // Khi click: phóng to tại chỗ (dùng translate hiện tại từ dataset)
-                        div.style.transform = `translate(${parseFloat(div.dataset.x)}px, ${parseFloat(div.dataset.y)}px) scale(2.5) rotate(0deg)`;
-                        div.style.zIndex = 999;
-                    } else {
-                        div.style.zIndex = 10;
-                    }
-                });
                 centerStage.appendChild(div);
                 satellites.push({ el: div, index: i, angleOffset: i * angleStep });
             });
 
+            // ANIMATION LOOP (Chỉ xoay, không logic click)
             function animateSatellites() {
-                baseAngle += 0.003;
+                baseAngle += 0.002; // Tốc độ xoay chậm rãi
+
                 satellites.forEach(sat => {
-                    // Nếu đang highlight thì bỏ qua animation để không bị giật
-                    if (sat.el.classList.contains('highlight')) return;
-
                     const currentAngle = baseAngle + sat.angleOffset;
-                    const x = Math.cos(currentAngle) * radiusX; const y = Math.sin(currentAngle) * radiusY;
-                    const scaleFactor = 1 + (y / radiusY) * 0.3; // Hiệu ứng 3D giả
-                    const opacity = 0.5 + (scaleFactor - 0.7) * 1.5;
-                    const blur = scaleFactor < 0.9 ? 'blur(1px)' : 'none';
-                    const zIndex = Math.floor(scaleFactor * 20); 
+                    const x = Math.cos(currentAngle) * radiusX;
+                    const y = Math.sin(currentAngle) * radiusY;
+                    
+                    // Hiệu ứng 3D: Càng gần (y lớn) càng to và rõ
+                    // y chạy từ -radiusY đến +radiusY
+                    const scaleFactor = 0.7 + ( (y + radiusY) / (2 * radiusY) ) * 0.6; // Scale từ 0.7 đến 1.3
+                    
+                    // Opacity: ở xa mờ hơn chút
+                    const opacity = 0.5 + (scaleFactor - 0.7) * 1.5; 
+                    
+                    // Z-Index: 
+                    // Lì xì ở giữa có z-index: 100.
+                    // Vệ tinh ở xa (y < 0) -> z-index < 100.
+                    // Vệ tinh ở gần (y > 0) -> z-index > 100.
+                    const zIndex = Math.floor(y + 200); 
 
-                    sat.el.dataset.x = x; sat.el.dataset.y = y;
                     sat.el.style.transform = `translate(${x}px, ${y}px) scale(${scaleFactor})`;
-                    sat.el.style.zIndex = zIndex; sat.el.style.opacity = opacity; sat.el.style.filter = blur;
-                    // Bóng đổ thay đổi theo độ xa gần
-                    sat.el.style.boxShadow = `0 5px ${15 * scaleFactor}px rgba(0,0,0, ${scaleFactor - 0.5})`;
+                    sat.el.style.zIndex = zIndex;
+                    sat.el.style.opacity = Math.min(1, Math.max(0.4, opacity));
+                    
+                    // Blur nhẹ khi ở xa
+                    sat.el.style.filter = y < -20 ? 'blur(2px)' : 'none'; 
                 });
+
                 requestAnimationFrame(animateSatellites);
             }
+
             requestAnimationFrame(animateSatellites);
-            setTimeout(() => satellites.forEach(s => s.el.style.transition = 'opacity 1s, transform 0.1s'), 100); // 0.1s transform để mượt animation
-            setInterval(() => spawnManyFireworks(Math.random()*(isMobile?2:3) + 1), 3000);
+            setInterval(() => spawnManyFireworks(Math.random()*(isMobile?1:2) + 1), 3000);
         }
 
         /* --- XỬ LÝ LÌ XÌ FINAL & MƯA TIỀN --- */
@@ -1125,10 +1141,9 @@
         const burstSound = document.getElementById('burst-sound');
         let dustInterval;
 
-        // --- HÀM TẠO MƯA TIỀN ---
         function startMoneyRain() {
-            const duration = 5000; // Mưa trong 5 giây
-            const interval = 100; // Tần suất rớt
+            const duration = 5000; 
+            const interval = 100; 
             
             const rainInterval = setInterval(() => {
                 createFallingMoney(Math.random() > 0.5 ? 'bill' : 'coin');
@@ -1161,7 +1176,6 @@
             envelope.classList.add('open');
             if(openSound) openSound.play().catch(e => {});
             
-            // KÍCH HOẠT MƯA TIỀN
             startMoneyRain();
 
             setTimeout(() => {
