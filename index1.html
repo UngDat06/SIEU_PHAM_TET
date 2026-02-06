@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Tết Nguyên Đán 2026 - Kim Ngọc Mãn Đường</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Playfair+Display:wght@700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="no-scroll">
+    <div class="particle-container" id="global-particles"></div>
+
+    <div id="countdown-screen">
+        <div id="countdown">10</div>
+        <div class="countdown-subtext">Đếm ngược chào Xuân 2026...</div>
+    </div>
+
+    <div id="fireworks-screen">
+        <canvas id="fireworks-canvas"></canvas>
+        <div class="fireworks-text">Chúc Mừng<br>Năm Mới 2026!</div>
+    </div>
+
+    <div id="intro-envelope-screen">
+        <div class="intro-instruction" id="intro-inst">Lộc Xuân Gõ Cửa</div>
+        <div class="envelope-light"></div>
+        
+        <div id="intro-envelope" class="luxury-envelope">
+            <div class="luxury-flap"></div>
+            <div class="gold-seal"></div>
+            <div class="envelope-face">
+                <div class="decorative-band">
+                    <div class="decorative-text">Xuân 2026</div>
+                </div>
+                <div style="color: #FFD700; font-size: 0.9rem; letter-spacing: 2px; text-shadow: 0 1px 2px rgba(0,0,0,0.5);">BẤM ĐỂ MỞ</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="input-form-screen">
+        <div class="form-container">
+            <h1 class="form-title">Nhận Lộc Xuân</h1>
+            <div class="hint-text">(Demo: Nguyen Van A, Developer, Teacher...)</div>
+            <div class="input-group">
+                <label class="input-label" for="user-name">Họ và tên:</label>
+                <input type="text" id="user-name" class="form-input" placeholder="Nhập họ và tên của bạn">
+                <div class="error-message" id="name-error">Vui lòng nhập họ và tên hợp lệ</div>
+            </div>
+            <div class="input-group">
+                <label class="input-label" for="user-role">Vai trò:</label>
+                <select id="user-role" class="form-select">
+                    <option value="" disabled selected>Chọn vai trò của bạn</option>
+                    <option value="developer">Lập trình viên</option>
+                    <option value="designer">Thiết kế</option>
+                    <option value="student">Học sinh/Sinh viên</option>
+                    <option value="teacher">Giáo viên</option>
+                    <option value="manager">Quản lý</option>
+                    <option value="other">Khác</option>
+                </select>
+                <div class="error-message" id="role-error">Vui lòng chọn vai trò</div>
+            </div>
+            
+            <div class="input-group">
+                <label class="input-label" for="user-birthday">Ngày tháng năm sinh (dd/mm/yyyy):</label>
+                <input type="text" id="user-birthday" class="form-input" placeholder="Ví dụ: 15/01/2000">
+                <div class="error-message" id="birthday-error">Vui lòng nhập đúng định dạng (vd: 15/01/2000)</div>
+            </div>
+            <button class="submit-btn" id="submit-info">Xác Nhận Thông Tin</button>
+            <div class="error-message" id="general-error"></div>
+        </div>
+    </div>
+
+    <div id="transition-screen">
+        <div id="transition-text"></div>
+    </div>
+
+    <div id="slideshow-screen">
+        <div class="slide-image-container" id="slide-container"></div>
+        <div class="slide-caption" id="slide-caption"></div>
+    </div>
+
+    <div id="final-screen">
+        <h1 class="final-title-text">Vạn Sự Như Ý 2026</h1>
+        <div class="halo-ring"></div> 
+        <div id="center-stage">
+            <div id="final-envelope-container">
+                <div id="final-envelope" class="luxury-envelope">
+                    <div class="luxury-flap" style="height: 55%; z-index: 10;"></div>
+                    <div class="gold-seal" style="width: 90px; height: 90px; top: 40%;"></div>
+                    <div class="envelope-face">
+                        <div class="decorative-band" style="width: 70%; height: 160px;">
+                            <div class="decorative-text" style="font-size: 3rem;">Phát Tài</div>
+                        </div>
+                        <div class="click-hint" style="color: #fff; font-weight: bold; animation: blink 1s infinite; text-shadow: 0 1px 2px rgba(0,0,0,0.5);">(Nhấn để nhận lộc)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="red-envelope-screen">
+        <div class="god-rays"></div>
+        <div id="modal-particles" style="position: absolute; top:0; left:0; width:100%; height:100%; pointer-events:none; overflow: hidden;"></div>
+        
+        <div class="luxury-card">
+            <div class="luxury-inner">
+                <div class="luxury-avatar">
+                    <img src="https://i.pinimg.com/736x/a7/b6/67/a7b667b0da309a125fc167d1463a3d98.jpg" alt="Thần Tài">
+                </div>
+                <h2 class="gold-text">Tấn Tài Tấn Lộc</h2>
+                <p class="wishes-text" id="personal-wishes"></p>
+                <div class="qr-frame">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=ChucMungNamMoi_2026" alt="QR Code">
+                </div>
+                <button class="royal-btn" onclick="closeModal()">Nhận Lộc Ngay</button>
+            </div>
+        </div>
+    </div>
+
+    <button class="music-btn" id="music-toggle"><i class="fas fa-music"></i></button>
+    <audio id="bg-music" loop>
+        <source src="https://assets.mixkit.co/music/preview/mixkit-vietnamese-tet-holiday-120.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="open-sound" src="https://assets.mixkit.co/active_storage/sfx/2014/2014-preview.mp3"></audio>
+    <audio id="burst-sound" src="https://assets.mixkit.co/active_storage/sfx/2013/2013-preview.mp3"></audio>
+
+    <script src="script.js"></script>
+</body>
+</html>

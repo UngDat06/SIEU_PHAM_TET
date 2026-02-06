@@ -1,0 +1,541 @@
+/* --- CẤU HÌNH MÀU SẮC & BIẾN --- */
+:root {
+    --tet-red: #D20000;
+    --tet-gold: #FFD700;
+    --tet-dark: #0a0a0a;
+    /* Luxury Variables */
+    --gold-foil: linear-gradient(135deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+    --red-paper: radial-gradient(circle at center, #D20000 0%, #900000 80%, #400000 100%);
+    /* Màu Vàng Ảnh Cũ (Vintage Gold) cho bao cuối */
+    --vintage-gold-paper: radial-gradient(circle at center, #FFD700 0%, #DAA520 60%, #B8860B 100%);
+    --vintage-gold-flap: linear-gradient(135deg, #E6C200 0%, #B8860B 100%);
+    --royal-red-seal: radial-gradient(circle at 30% 30%, #ff4d4d, #cc0000);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+body {
+    background-color: #000;
+    color: white;
+    overflow: hidden; 
+    min-height: 100vh;
+    font-family: 'Montserrat', sans-serif;
+    user-select: none; -webkit-user-select: none;
+}
+
+/* --- 1. ĐẾM NGƯỢC --- */
+#countdown-screen {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: radial-gradient(circle, #200000 0%, #000000 80%);
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    z-index: 2000; transition: opacity 1.5s ease;
+    overflow: hidden;
+}
+#countdown {
+    font-size: 20vw; 
+    font-weight: 900; font-family: 'Playfair Display', serif;
+    background: linear-gradient(to bottom, #FFFFC2, #FFD700, #DAA520);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 30px rgba(255, 215, 0, 0.4));
+    position: relative;
+    animation: intensePulse 0.8s infinite alternate;
+}
+@keyframes intensePulse {
+    0% { transform: scale(1); filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.5)); }
+    100% { transform: scale(1.05); filter: drop-shadow(0 0 50px rgba(255, 215, 0, 0.8)); }
+}
+
+.critical-count {
+    animation: criticalFlash 0.3s infinite alternate !important;
+    background: linear-gradient(to bottom, #ff9999, #ff0000, #8b0000) !important;
+    -webkit-background-clip: text !important;
+}
+@keyframes criticalFlash {
+    0% { opacity: 1; transform: scale(1.1); filter: drop-shadow(0 0 40px red); }
+    100% { opacity: 0.8; transform: scale(1.2); filter: drop-shadow(0 0 70px red); }
+}
+
+.countdown-subtext {
+    font-size: 4vw; 
+    color: #FFA500; margin-top: 20px; letter-spacing: 2px;
+    font-family: 'Dancing Script', cursive; text-align: center;
+    text-shadow: 0 0 10px rgba(255, 165, 0, 0.5);
+}
+
+.screen-shake { animation: screenShake 0.2s infinite alternate; }
+@keyframes screenShake { 0% { transform: translate(-2px, -2px); } 100% { transform: translate(2px, 2px); } }
+
+.flip-digit { display: inline-block; animation: flip 0.5s ease-in-out; }
+@keyframes flip { 0% { transform: rotateX(0deg); } 50% { transform: rotateX(90deg); } 100% { transform: rotateX(0deg); } }
+
+/* --- 2. MÀN HÌNH PHÁO HOA --- */
+#fireworks-screen {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(to bottom, #050510 0%, #000000 100%);
+    z-index: 1900;
+    display: none;
+}
+#fireworks-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+
+.fireworks-text {
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 5rem;
+    font-family: 'Dancing Script', cursive;
+    text-align: center; z-index: 100; opacity: 0;
+    background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+    background-size: 400%;
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    animation: fadeInOut 5s ease-in-out forwards, rainbow 10s linear infinite;
+}
+@keyframes rainbow { 0% {background-position: 0%;} 100% {background-position: 400%;} }
+@keyframes fadeInOut { 0% {opacity:0; transform:translate(-50%,-50%) scale(0.5);} 20%,80% {opacity:1; transform:translate(-50%,-50%) scale(1);} 100% {opacity:0; transform:translate(-50%,-50%) scale(1.2);} }
+
+/* --- 3. LUXURY ENVELOPE STYLES --- */
+@keyframes goldShimmer {
+    0% { background-position: -200% center; }
+    100% { background-position: 200% center; }
+}
+
+@keyframes sealPulse {
+    0% { transform: translate(-50%, -50%) scale(1); box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.7); }
+    70% { transform: translate(-50%, -50%) scale(1.1); box-shadow: 0 0 20px 10px rgba(255, 215, 0, 0); }
+    100% { transform: translate(-50%, -50%) scale(1); box-shadow: 0 0 0 0 rgba(255, 215, 0, 0); }
+}
+
+/* Style chung cho bao lì xì */
+.luxury-envelope {
+    width: 220px; height: 320px;
+    background: var(--red-paper);
+    border-radius: 10px;
+    position: relative;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.6), inset 0 0 30px rgba(0,0,0,0.5);
+    border: 2px solid #b38728;
+    transform-style: preserve-3d;
+    cursor: pointer;
+    overflow: visible;
+}
+
+.luxury-envelope::before {
+    content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background-image: radial-gradient(#ffd700 15%, transparent 16%), radial-gradient(#ffd700 15%, transparent 16%);
+    background-size: 30px 30px; background-position: 0 0, 15px 15px;
+    opacity: 0.1; pointer-events: none; border-radius: 8px;
+}
+
+.luxury-flap {
+    position: absolute; top: 0; left: 0; width: 100%; height: 40%;
+    background: var(--red-paper);
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+    transform-origin: top; z-index: 5;
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    border-top: 3px solid #b38728;
+}
+.luxury-flap::after {
+    content: ''; position: absolute; top: -5px; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(to bottom, rgba(255,215,0,0.2), transparent);
+    pointer-events: none;
+}
+
+.gold-seal {
+    position: absolute; top: 38%; left: 50%;
+    width: 70px; height: 70px;
+    background: var(--gold-foil);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 6;
+    display: flex; justify-content: center; align-items: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+    border: 2px solid #fcf6ba;
+    transition: all 0.5s ease;
+    animation: sealPulse 2s infinite;
+}
+.gold-seal::before {
+    content: 'Tết';
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem; font-weight: bold;
+    color: #8B0000; text-shadow: 0 1px 0 rgba(255,255,255,0.4);
+}
+
+.envelope-face {
+    position: absolute; bottom: 0; left: 0; width: 100%; height: 100%;
+    display: flex; flex-direction: column; justify-content: flex-end; align-items: center;
+    padding-bottom: 40px; z-index: 2;
+}
+
+.decorative-band {
+    width: 65%; height: 140px;
+    border: 2px solid rgba(255, 215, 0, 0.4);
+    display: flex; justify-content: center; align-items: center;
+    margin-bottom: 20px; position: relative;
+}
+.decorative-text {
+    font-family: 'Dancing Script', cursive; font-size: 2.5rem;
+    background: var(--gold-foil); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 2px 2px rgba(0,0,0,0.5));
+}
+
+/* --- OVERRIDE RIÊNG CHO BAO LÌ XÌ CUỐI CÙNG (VINTAGE GOLD) --- */
+#final-envelope {
+    background: var(--vintage-gold-paper) !important;
+    border-color: #fff !important;
+    box-shadow: 0 0 80px rgba(255, 215, 0, 0.6) !important;
+}
+
+#final-envelope .luxury-flap {
+    background: var(--vintage-gold-flap) !important;
+    border-top: 3px solid #fff;
+}
+
+#final-envelope .gold-seal {
+    background: var(--royal-red-seal) !important;
+    border: 2px solid #FFD700 !important;
+    box-shadow: 0 5px 20px rgba(139, 0, 0, 0.4);
+}
+#final-envelope .gold-seal::before {
+    color: #FFD700 !important;
+}
+
+#final-envelope .decorative-band {
+    border-color: #8B0000 !important;
+}
+#final-envelope .decorative-text {
+    background: none !important;
+    -webkit-text-fill-color: #8B0000 !important;
+    text-shadow: 0 1px 1px rgba(255,255,255,0.3);
+}
+#final-envelope .click-hint {
+    color: #8B0000 !important;
+    text-shadow: none !important;
+}
+
+/* States */
+.luxury-envelope.open .luxury-flap { transform: rotateX(180deg); z-index: 0; }
+.luxury-envelope.open .gold-seal { opacity: 0; transform: translate(-50%, -150%) scale(0); }
+
+/* Screen Specifics */
+#intro-envelope-screen {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    z-index: 1850; display: none;
+    justify-content: center; align-items: center; flex-direction: column;
+    background: radial-gradient(circle, #500000 0%, #200000 100%);
+    opacity: 0; transition: opacity 1s ease;
+}
+
+.intro-instruction {
+    color: #FFD700; font-family: 'Dancing Script', cursive; font-size: 2.5rem; margin-bottom: 40px;
+    text-shadow: 0 0 15px rgba(255, 215, 0, 0.8); 
+    opacity: 0; transform: translateY(20px); transition: all 1s ease;
+}
+.intro-instruction.show { opacity: 1; transform: translateY(0); }
+
+#intro-envelope {
+    opacity: 0; transform: translateY(100vh) scale(0.8) rotate(5deg);
+    transition: all 1.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+#intro-envelope.visible {
+    opacity: 1; transform: translateY(0) scale(1) rotate(0deg);
+    animation: floatEnvelope 3s ease-in-out infinite 1.5s;
+}
+@keyframes floatEnvelope { 0%,100% {transform:translateY(0) rotate(0deg);} 50% {transform:translateY(-20px) rotate(2deg);} }
+
+.envelope-light {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(255, 215, 0, 0.4) 0%, rgba(255, 0, 0, 0) 70%);
+    z-index: -1; opacity: 0; transition: opacity 1s ease;
+}
+#intro-envelope.visible ~ .envelope-light { opacity: 0.8; animation: pulseLight 3s ease-in-out infinite; }
+@keyframes pulseLight { 0%,100% {opacity:0.5; transform:translate(-50%,-50%) scale(1);} 50% {opacity:0.8; transform:translate(-50%,-50%) scale(1.2);} }
+
+/* --- 4. FORM NHẬP THÔNG TIN --- */
+#input-form-screen {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: radial-gradient(circle at center, #500000 0%, #1a0000 100%);
+    z-index: 1800; display: none;
+    flex-direction: column; justify-content: center; align-items: center;
+    padding: 20px; opacity: 0; transition: opacity 1s ease;
+}
+.form-container {
+    background: rgba(80, 0, 0, 0.6);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 215, 0, 0.3); border-radius: 20px;
+    padding: 40px 30px; width: 100%; max-width: 500px;
+    box-shadow: 0 0 50px rgba(255, 0, 0, 0.4); text-align: center;
+}
+.form-title { font-family: 'Dancing Script', cursive; font-size: 3rem; color: #FFD700; margin-bottom: 30px; }
+.input-group { margin-bottom: 25px; text-align: left; }
+.input-label { display: block; color: #FFD700; margin-bottom: 8px; font-size: 1.1rem; }
+.form-input, .form-select {
+    width: 100%; padding: 15px; background: rgba(0, 0, 0, 0.3);
+    border: 1px solid #FFD700; border-radius: 10px; color: white;
+    font-size: 1rem; outline: none; transition: all 0.3s;
+}
+.form-input:focus { background: rgba(50, 0, 0, 0.5); box-shadow: 0 0 15px rgba(255, 215, 0, 0.4); }
+.submit-btn {
+    background: linear-gradient(to right, #DAA520, #FFD700, #DAA520);
+    background-size: 200%;
+    color: #800000; border: none; padding: 15px 40px;
+    border-radius: 50px; font-size: 1.2rem; font-weight: bold;
+    cursor: pointer; margin-top: 20px; width: 100%; transition: all 0.3s;
+    box-shadow: 0 5px 20px rgba(218, 165, 32, 0.3);
+}
+.submit-btn:hover { background-position: right center; transform: scale(1.02); }
+.error-message { color: #FF6B6B; margin-top: 10px; font-size: 0.9rem; display: none; }
+.hint-text { color: #ccc; font-size: 0.8rem; margin-bottom: 20px; font-style: italic; }
+
+/* --- 5. TRANSITION & SLIDESHOW --- */
+#transition-screen {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: #200000; z-index: 1700;
+    display: none; justify-content: center; align-items: center; padding: 20px;
+}
+#transition-text {
+    font-family: 'Playfair Display', serif; font-size: 2.5rem; color: #FFD700;
+    text-align: center; line-height: 1.4;
+    text-shadow: 0 0 20px rgba(218, 165, 32, 0.5);
+}
+.cursor { display: inline-block; width: 3px; height: 1em; background-color: #FFD700; animation: blinkCursor 0.8s infinite; vertical-align: bottom; margin-left: 2px; }
+@keyframes blinkCursor { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+#slideshow-screen {
+    display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: radial-gradient(circle, #3d0000 0%, #150000 100%);
+    z-index: 1000; justify-content: center; align-items: center; flex-direction: column;
+}
+.slide-image-container { position: relative; width: 90%; max-width: 600px; height: 60vh; display: flex; justify-content: center; align-items: center; }
+.slide-img {
+    max-width: 100%; max-height: 100%; border-radius: 15px;
+    box-shadow: 0 0 30px rgba(255, 215, 0, 0.3); border: 2px solid #FFD700;
+    opacity: 0; position: absolute; transition: all 1.5s ease-in-out; transform: scale(0.9);
+}
+.slide-img.active { opacity: 1; transform: scale(1); }
+.slide-caption {
+    margin-top: 20px; font-size: 2rem; color: #FFD700; text-align: center;
+    font-family: 'Dancing Script', cursive; opacity: 0; transition: opacity 1s ease;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+}
+
+/* --- 6. FINAL SCREEN & SATELLITES --- */
+#final-screen {
+    display: none; width: 100%; height: 100vh;
+    background: radial-gradient(circle at center, #500000 0%, #2b0000 50%, #100000 100%);
+    position: relative; overflow: hidden; z-index: 10;
+}
+#final-screen::before {
+    content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background-image: 
+        radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 3px),
+        radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 2px);
+    background-size: 550px 550px, 350px 350px;
+    animation: starMove 100s linear infinite; opacity: 0.6; z-index: 1;
+}
+@keyframes starMove { from { transform: translateY(0); } to { transform: translateY(-1000px); } }
+
+.halo-ring {
+    position: absolute; top: 50%; left: 50%; width: 320px; height: 320px;
+    transform: translate(-50%, -50%); border: 2px dashed rgba(255, 215, 0, 0.3);
+    border-radius: 50%; animation: rotateHalo 30s linear infinite; pointer-events: none; z-index: 15;
+}
+.halo-ring::after {
+    content: ''; position: absolute; top: -8px; left: 50%; transform: translateX(-50%);
+    width: 16px; height: 16px; background: #FFD700; border-radius: 50%; box-shadow: 0 0 20px #FFD700;
+}
+@keyframes rotateHalo { from { transform: translate(-50%, -50%) rotate(0deg); } to { transform: translate(-50%, -50%) rotate(360deg); } }
+
+#center-stage {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    width: 0; height: 0; z-index: 20; display: flex; justify-content: center; align-items: center;
+}
+#final-envelope-container {
+    position: absolute; 
+    /* Z-index cố định để các hành tinh có thể bay ra trước/sau */
+    z-index: 100; 
+    width: 220px; height: 320px; perspective: 1000px;
+    opacity: 0; transform: scale(0); transition: all 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+#final-envelope-container.show { opacity: 1; transform: scale(1); }
+
+/* --- VỆ TINH: ẢNH TO RÕ (Giao diện mới) --- */
+.satellite-item {
+    position: absolute;
+    /* Kích thước được set trong JS để responsive, nhưng default ở đây */
+    width: 100px; height: 100px; 
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.3);
+    border: 3px solid rgba(255, 215, 0, 0.9);
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+    
+    display: flex; justify-content: center; align-items: center;
+    /* Bỏ pointer-events để không chặn click vào lì xì nếu lỡ đè lên */
+    pointer-events: none; 
+    
+    z-index: 20;
+    transform-style: preserve-3d;
+    will-change: transform, z-index, opacity;
+}
+
+/* Loại bỏ nắp bao lì xì cũ */
+.satellite-item::before { content: none; }
+
+/* Vòng xoay trang trí nhẹ */
+.satellite-item::after {
+    content: ''; position: absolute; 
+    top: -8px; left: -8px; right: -8px; bottom: -8px;
+    border-radius: 50%;
+    border: 1px dashed rgba(255, 215, 0, 0.4);
+    animation: spinSatelliteRing 20s linear infinite;
+}
+@keyframes spinSatelliteRing { from {transform: rotate(0deg);} to {transform: rotate(360deg);} }
+
+/* Ảnh bên trong to rõ */
+.satellite-item img {
+    width: 100%; height: 100%;
+    border-radius: 50%; 
+    object-fit: cover;
+    z-index: 2;
+}
+
+.final-title-text {
+    position: absolute; top: 10%; width: 100%; text-align: center;
+    font-size: 3rem; font-family: 'Playfair Display', serif;
+    background: linear-gradient(to right, #FFD700, #FFFACD, #DAA520);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 15px rgba(255, 0, 0, 0.8));
+    z-index: 30; opacity: 0; animation: fadeIn 2s forwards 1s;
+    letter-spacing: 2px; padding: 0 10px;
+}
+@keyframes fadeIn { to { opacity: 1; } }
+
+/* --- 7. MODAL LÌ XÌ LUXURY --- */
+#red-envelope-screen {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: radial-gradient(circle, #a00000 0%, #600000 70%, #200000 100%);
+    z-index: 3000;
+    display: none; justify-content: center; align-items: center;
+    backdrop-filter: blur(5px); perspective: 1500px; padding: 20px;
+}
+
+.god-rays {
+    position: absolute; width: 150vmax; height: 150vmax;
+    background: repeating-conic-gradient(from 0deg, rgba(255, 215, 0, 0.25) 0deg 10deg, transparent 10deg 20deg);
+    animation: rotateRays 30s linear infinite; z-index: -1; pointer-events: none;
+    mix-blend-mode: overlay;
+}
+@keyframes rotateRays { to { transform: rotate(360deg); } }
+
+.luxury-card {
+    width: 100%; max-width: 400px; padding: 3px; 
+    background: linear-gradient(135deg, #bf953f, #fcf6ba, #bf953f);
+    border-radius: 25px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), 0 0 80px rgba(255, 69, 0, 0.5);
+    animation: openCard 0.6s cubic-bezier(0.34, 1.56, 0.64, 1); position: relative;
+}
+@keyframes openCard { 0% { transform: scale(0.6); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+
+.luxury-inner {
+    background: radial-gradient(circle, #800000 0%, #300000 100%);
+    border-radius: 20px; padding: 30px 20px;
+    display: flex; flex-direction: column; align-items: center;
+    border: 1px solid rgba(255, 215, 0, 0.2); position: relative; overflow: hidden;
+}
+.luxury-inner::before {
+    content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background-image: radial-gradient(circle, rgba(255,215,0,0.1) 2px, transparent 3px);
+    background-size: 20px 20px; opacity: 0.5; pointer-events: none;
+}
+
+.luxury-avatar {
+    width: 110px; height: 110px; border-radius: 50%;
+    border: 3px double #FFD700; box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+    padding: 2px; background: radial-gradient(circle, #ffd700, #ffaa00); margin-bottom: 20px; z-index: 2;
+}
+.luxury-avatar img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
+.gold-text {
+    font-family: 'Dancing Script', cursive; font-size: 2.5rem;
+    background: linear-gradient(to bottom, #FFD700, #FFFACD, #DAA520);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 2px 0px rgba(0,0,0,0.5)); margin-bottom: 10px; text-align: center; z-index: 2;
+}
+.wishes-text {
+    color: #fff; font-size: 1.1rem; line-height: 1.6; text-align: center; margin-bottom: 25px;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.5); font-weight: 500; z-index: 2;
+}
+.qr-frame {
+    padding: 10px; background: rgba(255,255,255,0.15);
+    border: 2px solid #FFD700; border-radius: 12px; margin-bottom: 25px; z-index: 2;
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.2);
+}
+.qr-frame img { display: block; border-radius: 5px; width: 140px; height: 140px; }
+.royal-btn {
+    background: linear-gradient(90deg, #d4af37, #f7ef8a, #d4af37);
+    background-size: 200% auto;
+    animation: goldShimmer 3s linear infinite;
+    color: #500000; font-weight: 900; border: none; width: 100%;
+    padding: 16px 0; border-radius: 50px; cursor: pointer; z-index: 2;
+    font-size: 1.2rem; text-transform: uppercase; letter-spacing: 1px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.4); transition: transform 0.2s;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.4);
+}
+.royal-btn:active { transform: scale(0.95); }
+.royal-btn:hover { background-position: right center; }
+
+/* HỆ THỐNG HẠT & MUSIC */
+.particle-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 9999; }
+.burst-particle { position: absolute; border-radius: 50%; pointer-events: none; }
+.gold-dust {
+    position: absolute; width: 5px; height: 5px; background: #FFD700; border-radius: 50%;
+    animation: fall 3s linear forwards; pointer-events: none;
+    box-shadow: 0 0 5px #FFD700;
+}
+@keyframes fall { to { transform: translateY(600px) rotate(360deg); } }
+
+.music-btn {
+    position: fixed; bottom: 20px; right: 20px; width: 60px; height: 60px;
+    border-radius: 50%; background: rgba(255, 0, 0, 0.8); border: 2px solid #FFD700; 
+    cursor: pointer; z-index: 5000;
+    display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: #FFD700;
+    animation: spin 5s linear infinite; box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+    touch-action: manipulation; 
+}
+@keyframes spin { 100% { transform: rotate(360deg); } }
+
+/* --- 8. HIỆU ỨNG TIỀN RƠI (MONEY RAIN) --- */
+.falling-money {
+    position: fixed; top: -100px;
+    z-index: 9999;
+    pointer-events: none;
+    animation-name: moneyFall;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+}
+
+/* Tiền giấy (Giả lập Polymer) */
+.money-bill {
+    width: 80px; height: 35px;
+    /* Dùng link ảnh 500k hoặc fallback màu xanh nếu lỗi */
+    background-color: #85bb65; 
+    background-image: url('https://upload.wikimedia.org/wikipedia/vi/1/1c/500000_VND_polymer_back.jpg');
+    background-size: cover; background-position: center;
+    border: 1px solid rgba(255,255,255,0.5);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    border-radius: 2px;
+}
+
+/* Đồng xu vàng */
+.money-coin {
+    width: 30px; height: 30px;
+    background: radial-gradient(circle at 30% 30%, #FFD700, #DAA520);
+    border: 2px solid #FFFACD;
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
+    display: flex; justify-content: center; align-items: center;
+    font-weight: bold; color: #B8860B; font-size: 12px;
+}
+.money-coin::after { content: '$'; }
+
+/* Animation rơi xoay vòng */
+@keyframes moneyFall {
+    0% { transform: translateY(0) rotateX(0deg) rotateY(0deg) rotateZ(0deg); opacity: 1; }
+    80% { opacity: 1; }
+    100% { transform: translateY(110vh) rotateX(720deg) rotateY(360deg) rotateZ(180deg); opacity: 0; }
+}
