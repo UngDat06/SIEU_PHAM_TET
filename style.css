@@ -1149,3 +1149,65 @@ body {
         opacity: 0;
     }
 }
+/* =========================================
+   BỔ SUNG RESPONSIVE CHO ĐIỆN THOẠI (MOBILE)
+   Đặt đoạn này ở CUỐI CÙNG file CSS
+========================================= */
+
+@media screen and (max-width: 768px) {
+    /* 1. Thu nhỏ kích thước tổng thể của phong bao */
+    .luxury-envelope {
+        /* Kích thước cũ: 220px x 320px */
+        /* Kích thước mới trên mobile (giảm khoảng 30%) */
+        width: 160px !important;
+        height: 235px !important;
+    }
+
+    /* 2. Thu nhỏ con dấu (Seal) bên trong */
+    .gold-seal {
+        width: 50px !important;  /* Cũ: 70px */
+        height: 50px !important; /* Cũ: 70px */
+        top: 35% !important;     /* Điều chỉnh vị trí một chút */
+    }
+
+    /* Thu nhỏ chữ "Tết" trong con dấu */
+    .gold-seal::before {
+        font-size: 1.2rem !important; /* Cũ: 1.8rem */
+    }
+
+    /* 3. Thu nhỏ khu vực chữ trang trí (Decorative Band) */
+    .decorative-band {
+        height: 90px !important;   /* Cũ: 140px */
+        width: 80% !important;     /* Rộng hơn một chút so với khung bao nhỏ */
+        margin-bottom: 15px !important;
+    }
+
+    /* 4. Thu nhỏ chữ to (Ví dụ: Xuân 2026 hoặc Phát Tài) */
+    .decorative-text {
+        font-size: 1.5rem !important; /* Cũ: 2.5rem hoặc 3rem */
+        letter-spacing: 1px !important; /* Giảm khoảng cách chữ */
+    }
+
+    /* Xử lý riêng cho chữ "Phát Tài" ở bao cuối nếu cần */
+    #final-envelope .decorative-text {
+         /* Đảm bảo nó không bị tràn ra ngoài trên màn hình bé */
+         white-space: nowrap;
+         transform: scale(0.9); /* Thu nhỏ nhẹ nếu vẫn to */
+    }
+
+    /* 5. Thu nhỏ dòng chữ gợi ý bấm */
+    .click-hint,
+    .envelope-face > div[style*="font-size: 0.9rem"] {
+        font-size: 0.7rem !important; /* Cũ: 0.9rem */
+        letter-spacing: 1px !important;
+    }
+
+    /* 6. (Tùy chọn) Tăng khoảng cách vòng xoay ảnh trên mobile
+       Nếu sau khi thu nhỏ bao lì xì mà ảnh vẫn bị sát quá,
+       hãy bỏ comment (xóa dấu gạch chéo sao) dòng dưới để đẩy ảnh ra xa hơn */
+    /*
+    #center-stage {
+        transform: translate(-50%, -50%) scale(1.1);
+    }
+    */
+}
