@@ -1150,50 +1150,57 @@ body {
     }
 }
 /* =========================================
-   MOBILE FIX: PHƯƠNG PHÁP SCALE (Thu nhỏ toàn bộ)
-   Dán đoạn này vào CUỐI CÙNG file style.css
+   MOBILE FIX V2: TỶ LỆ VÀNG (CÂN BẰNG GIỮA TO & KHÔNG CHE ẢNH)
+   Thay thế toàn bộ đoạn @media cũ bằng đoạn này
 ========================================= */
 
 @media screen and (max-width: 768px) {
-    /* 1. Thu nhỏ toàn bộ bao lì xì bằng Scale */
+    /* 1. Tăng kích thước bao lì xì lên mức 0.85 (To, rõ ràng, sang trọng) */
     #final-envelope {
-        /* Thu nhỏ còn 60% so với kích thước gốc */
-        transform: scale(0.6) !important;
+        transform: scale(0.85) !important; /* Cũ là 0.6 (quá bé), giờ là 0.85 */
         transform-origin: center center !important;
-        
-        /* Đảm bảo nó nằm giữa */
         margin: 0 auto !important;
+        
+        /* Thêm bóng đổ đậm hơn để tách biệt hẳn với nền */
+        box-shadow: 0 0 30px rgba(0,0,0,0.8) !important;
     }
 
-    /* 2. Điều chỉnh container chứa nó */
+    /* 2. Căn chỉnh khung chứa */
     #final-envelope-container {
         width: 100% !important;
         height: 100% !important;
         display: flex !important;
         justify-content: center !important;
         align-items: center !important;
+        
+        /* Đẩy nhẹ lên trên một chút để phần dưới thoáng hơn */
+        padding-bottom: 40px !important; 
     }
 
-    /* 3. Đẩy các ảnh vệ tinh (ảnh mẹ và bà) ra xa hơn */
-    /* Vì bao lì xì nhỏ lại, ta cần đẩy ảnh ra để không bị dính chùm */
+    /* 3. Xử lý ẢNH VỆ TINH (Quan trọng) */
+    /* Vì bao lì xì to ra, ta cần thu nhỏ ảnh vệ tinh một chút xíu 
+       để chúng không đâm vào bao lì xì */
     .satellite-item {
-        /* Giữ kích thước ảnh nhỏ gọn */
-        width: 70px !important;
-        height: 70px !important;
-        margin-left: -35px !important;
-        margin-top: -35px !important;
+        width: 65px !important;  /* Kích thước vừa phải */
+        height: 65px !important;
+        margin-left: -32.5px !important; /* Căn giữa (bằng 1 nửa width) */
+        margin-top: -32.5px !important;
+        
+        /* Làm ảnh mờ đi 1 chút xíu để làm nền cho bao lì xì nổi bật nhất */
+        opacity: 0.9 !important; 
+        border-width: 2px !important; /* Viền mảnh lại cho tinh tế */
     }
-    
-    /* 4. Tinh chỉnh riêng cho chữ gợi ý bấm (vì scale nhỏ quá có thể khó đọc) */
+
+    /* 4. Tinh chỉnh chữ hướng dẫn bấm */
     .click-hint {
-        font-size: 1.2rem !important; /* Tăng size gốc lên để khi scale 0.6 vẫn đọc được */
-        font-weight: bold !important;
+        font-size: 1rem !important; /* Chữ to rõ: (Nhấn để nhận lộc) */
+        margin-top: 15px !important;
+        text-shadow: 0 2px 4px rgba(0,0,0,0.8) !important;
     }
     
-    /* 5. Ẩn bớt hiệu ứng hào quang nếu nó che mất ảnh */
-    .halo-ring {
-        width: 250px !important;
-        height: 250px !important;
-        opacity: 0.5 !important;
+    /* 5. Mở rộng sân khấu ra một chút để ảnh vệ tinh bay rộng hơn */
+    #center-stage {
+        /* Phóng to không gian bay của các vệ tinh lên 10% */
+        transform: translate(-50%, -50%) scale(1.1) !important; 
     }
 }
