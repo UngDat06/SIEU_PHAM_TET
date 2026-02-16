@@ -30,7 +30,7 @@ const contentDatabase = {
         ],
         wishTemplate: "Chúc mừng năm mới mẹ iu - mẹ {name} ! Năm nay con trai đã lớn, đã kiếm được tiền và hoàn thành lời hứa mang học bổng về cho mẹ. Mong món quà nhỏ này sẽ làm mẹ vui và tự hào. Sang năm mới, con chúc mẹ 2 chữ 'Bình An' và 'Sức Khỏe'. Mong mẹ luôn cười tươi, bớt lo toan và thay đổi những thói quen chưa tốt để mẹ luôn luôn happy nha. Mẹ khỏe mạnh là hạnh phúc lớn nhất của con!", 
         avatar: 'Image/mom/13.jpg',
-        qr: "Image/grandfather/QR.png",
+        qr: "Image/mom/qr.png",
     },
     "elder sister": {
         music: "Music/chigai.mp3",
@@ -53,7 +53,7 @@ const contentDatabase = {
         ],
         wishTemplate: "Năm nay so với năm trước chị cũng đã có những thay đổi, bước chuyển mình , tiến bộ hơn rất nhiều rồi.Để rồi chị cũng đã nhận được những phần quà, thành tựu đúng với công sức mà chị đã bỏ ra.Chúc chị gái của em sang năm mới sẽ có 1 năm thật là bùng nổ hơn nữa,chị hãy cố gắng giữ gìn sức khỏe vì có sức khỏe mới có thể làm được mọi việc được.Năm mới chị cố hãy cố gắng hạn chế được những thói quen chưa được tốt và hãy tiếp tục phát huy những điểm mạnh của mình.Chúc chị trong năm mới sẽ đạt được những mục tiêu mà bản thân đã đề ra.Chị hãy tiếp tục theo đuổi con đường bản thân mình đã chọn, làm những việc mình thích hãy luôn nhớ rằng ở phía sau chị luôn có mẹ và em luôn luôn đồng hành,ủng hộ cùng chị trong mọi con đường chị lựa chọn!(PS: Chúc chị kiếm được nhiều tiền để mua thật nhiều xúc xích cho em nhaaa, chị sớm có gấu để mùa đông không lạnh nha)",
         avatar: 'Image/elder_sister/anh3.jpg',
-        qr: "Image/grandfather/QR.png",
+        qr: "Image/elder_sister/qr.png",
     },
     "Grandfather": {
         music: "Music/tetbinhan.mp3",
@@ -68,7 +68,7 @@ const contentDatabase = {
         ],
         wishTemplate: "Chúc ông {name} và gia đình có một năm mới thật là nhiều sức khỏe, luôn vui vẻ, yêu đời. Ông cố gắng giữ gìn sức khỏe để ông cháu ta còn đi phượt Bắc Nam nha!",
         avatar: "Image/grandfather/avt.jpg",
-        qr: "Image/grandfather/QR.png",
+        qr: "Image/grandfather/qr.png",
     },
     "brother_village": {
         music: "Music/anhem.mp3",
@@ -86,7 +86,7 @@ const contentDatabase = {
             { url: 'Image/brother_stress/anh7.jpg', caption: 'Gác lại lo âu' },
         ],
         avatar: 'Image/brother_stress/anh8.jpg',
-        qr: "Image/grandfather/QR.png",
+        qr: "Image/brother_stress/qr.png",
     },
     "brother": {
         music: "Music/brother.mp3",
@@ -106,7 +106,7 @@ const contentDatabase = {
             { url: 'Image/brother/lh1.jpg', caption: 'Hát cuối năm' },
         ],
         avatar: 'Image/brother/snHung.jpg',
-        qr: "Image/grandfather/QR.png",
+        qr: "Image/brother/qr.png",
     }
 };
 
@@ -224,7 +224,7 @@ function checkUserInDatabase() {
             // Avatar Thần Tài mặc định
             document.getElementById('final-avatar').src = "Image/anhthantai.jpg";
             // QR mặc định
-            document.getElementById('final-qr').src = "Image/grandfather/QR.png"; 
+            document.getElementById('final-qr').src = "Image/qr.png"; 
 
             // Nhạc Tết chung
             const musicEl = document.getElementById('bg-music');
