@@ -5,7 +5,7 @@ const brothersInVillage = {
     "Cường": "Chúc ô a Cường năm mới thật nhiều sức khỏe, tiền vào như nước sông đà, chảy ra như giọt cafe phin.Chúc anh có 1 năm mới thật rực rỡ như hành trình của e nè haha.Mong rằng anh em ta sẽ có 1 năm mới thật nhiều kỉ niệm đẹp bên nhau!",
     "Hải": "Năm mới a chúc Hải 'Chân cứng đá mềm', biến những trải nghiệm trường đời sớm thành vốn sống quý giá. Tết là để về nhà, mong năm nay công việc hanh thông, ví dày, tâm an, để mỗi lần tụ họp vẫn luôn cười tươi rói nhé.Mong rằng anh em ta năm mới sẽ có thật nhiều kỉ niệm bên nhau!",
     "Hoàng": "Chúc Hoàng năm mới rực rỡ. 18 tuổi, người ta còn lo trang sách, em đã lo được nồi cơm, cái bản lĩnh ấy anh nể. Nhưng IT là đường đua khắc nghiệt, chúc em năm nay:Tối ưu hóa cuộc sống. Không có bằng cấp thì mình phải dùng đẳng cấp để nói chuyện. Kiếm tiền giỏi rồi, giờ nhớ giữ gìn sức khỏe và nâng cấp bản thân liên tục để không bao giờ bị tụt hậu nhé.Mong rằng anh em ta sang năm mới sẽ có thật nhiều kỉ niệm đáng nhớ trong năm mới!",
-    "Anh": "Chúc mừng năm mới người em hàng xóm-cu B! Năm qua thấy chú mày 'lột xác' thành thanh niên nghiêm túc rồi đấy, tiếp tục phát huy nhé. Năm mới a chúc sức khỏe vô biên để còn cày cuốc. Học hành thì cứ tự tin lên, bài nào khó quá thì mang sang đây... anh nhìn hộ rồi anh cổ vũ cho, chứ anh cũng 'gà' lắm. Đùa thôi, cần gì cứ hỏi, anh hỗ trợ hết mình!Thôi thì cũng lớn rồi sớm có gấu để mùa đông không lạnh nha e hihi.Tới đây thôi được rồi chúc năm mới vui vẻ nha e zai của a haha"
+    "Anh": "Chúc mừng năm mới người em hàng xóm-cu B! Năm qua a thấy chú mày 'lột xác' thành thanh niên nghiêm túc rồi đấy, tiếp tục phát huy nhé. Năm mới a chúc sức khỏe vô biên để còn cày cuốc. Học hành thì cứ tự tin lên, bài nào khó quá thì mang sang đây... anh nhìn hộ rồi anh cổ vũ cho, chứ anh cũng 'gà' lắm. Đùa thôi, cần gì cứ hỏi, anh hỗ trợ hết mình!Thôi thì cũng lớn rồi sớm có gấu để mùa đông không lạnh nha e hihi.Tới đây thôi được rồi chúc năm mới vui vẻ nha e zai của a haha"
 };
 
 const contentDatabase = {
@@ -28,7 +28,9 @@ const contentDatabase = {
             { url: 'Image/mom/12.jpg', caption: 'Hai mẹ con cười giống hệt nhau' },
            
         ],
-        wishTemplate: "Chúc mẹ {name} bước sang tuổi {age} luôn mạnh khỏe, vui vẻ bên con cháu. Cảm ơn mẹ đã luôn là chỗ dựa vững chắc cho con!"
+        wishTemplate: "Chúc mừng năm mới mẹ iu - mẹ {name} ! Năm nay con trai đã lớn, đã kiếm được tiền và hoàn thành lời hứa mang học bổng về cho mẹ. Mong món quà nhỏ này sẽ làm mẹ vui và tự hào. Sang năm mới, con chúc mẹ 2 chữ 'Bình An' và 'Sức Khỏe'. Mong mẹ luôn cười tươi, bớt lo toan và thay đổi những thói quen chưa tốt để mẹ luôn luôn happy nha. Mẹ khỏe mạnh là hạnh phúc lớn nhất của con!", 
+        avatar: 'Image/mom/13.jpg',
+        qr: "Image/grandfather/QR.png",
     },
     "elder sister": {
         music: "Music/chigai.mp3",
@@ -49,7 +51,9 @@ const contentDatabase = {
             { url: 'Image/elder_sister/8.jpg', caption: 'Sành điệu phết' },
             { url: 'Image/elder_sister/9.jpg', caption: 'Hoa đẹp hay người đẹp ?' },
         ],
-        wishTemplate: "Năm nay so với năm trước chị cũng đã có những thay đổi, bước chuyển mình , tiến bộ hơn rất nhiều rồi.Để rồi chị cũng đã nhận được những phần quà, thành tựu đúng với công sức mà chị đã bỏ ra.Chúc chị gái của em sang năm mới sẽ có 1 năm thật là bùng nổ hơn nữa,chị hãy cố gắng giữ gìn sức khỏe vì có sức khỏe mới có thể làm được mọi việc được.Năm mới chị cố hãy cố gắng hạn chế được những thói quen chưa được tốt và hãy tiếp tục phát huy những điểm mạnh của mình.Chúc chị trong năm mới sẽ đạt được những mục tiêu mà bản thân đã đề ra.Chị hãy tiếp tục theo đuổi con đường bản thân mình đã chọn, làm những việc mình thích hãy luôn nhớ rằng ở phía sau chị luôn có mẹ và em luôn luôn đồng hành,ủng hộ cùng chị trong mọi con đường chị lựa chọn!(PS: Chúc chị kiếm được nhiều tiền để mua thật nhiều xúc xích cho em nhaaa, chị sớm có gấu để mùa đông không lạnh nha)"
+        wishTemplate: "Năm nay so với năm trước chị cũng đã có những thay đổi, bước chuyển mình , tiến bộ hơn rất nhiều rồi.Để rồi chị cũng đã nhận được những phần quà, thành tựu đúng với công sức mà chị đã bỏ ra.Chúc chị gái của em sang năm mới sẽ có 1 năm thật là bùng nổ hơn nữa,chị hãy cố gắng giữ gìn sức khỏe vì có sức khỏe mới có thể làm được mọi việc được.Năm mới chị cố hãy cố gắng hạn chế được những thói quen chưa được tốt và hãy tiếp tục phát huy những điểm mạnh của mình.Chúc chị trong năm mới sẽ đạt được những mục tiêu mà bản thân đã đề ra.Chị hãy tiếp tục theo đuổi con đường bản thân mình đã chọn, làm những việc mình thích hãy luôn nhớ rằng ở phía sau chị luôn có mẹ và em luôn luôn đồng hành,ủng hộ cùng chị trong mọi con đường chị lựa chọn!(PS: Chúc chị kiếm được nhiều tiền để mua thật nhiều xúc xích cho em nhaaa, chị sớm có gấu để mùa đông không lạnh nha)",
+        avatar: 'Image/elder_sister/anh3.jpg',
+        qr: "Image/grandfather/QR.png",
     },
     "Grandfather": {
         music: "Music/tetbinhan.mp3",
@@ -80,7 +84,9 @@ const contentDatabase = {
             { url: 'Image/brother_stress/anh8.jpg', caption: 'Đi tìm bình yên' },
             { url: 'Image/brother_stress/anh6.jpg', caption: 'Bỏ phố về rừng' },
             { url: 'Image/brother_stress/anh7.jpg', caption: 'Gác lại lo âu' },
-        ]
+        ],
+        avatar: 'Image/brother_stress/anh8.jpg',
+        qr: "Image/grandfather/QR.png",
     },
     "brother": {
         music: "Music/brother.mp3",
@@ -98,7 +104,9 @@ const contentDatabase = {
             { url: 'Image/brother/tammua.jpg', caption: 'Tâm sự dưới mưa' },
             { url: 'Image/brother/lh.jpg', caption: 'Liên hoan cuối năm' },
             { url: 'Image/brother/lh1.jpg', caption: 'Hát cuối năm' },
-        ]
+        ],
+        avatar: 'Image/brother/snHung.jpg',
+        qr: "Image/grandfather/QR.png",
     }
 };
 
