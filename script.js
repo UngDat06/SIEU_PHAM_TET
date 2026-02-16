@@ -296,6 +296,7 @@ const mockDatabase = [
     { name: "Vũ Minh Đức", role: "brother", birthday: "11/09/2006" },
     { name: "Nguyễn Mai Nhật Anh", role: "brother", birthday: "24/05/2006" },
     { name: "Nguyễn Tuấn Hưng", role: "brother", birthday: "12/06/2006" },
+    { name: "Lê Mạnh Cường", role: "brother_stress", birthday: "16/07/2003" },
 ];
 
 // --- 2. BIẾN TOÀN CỤC & INIT ---
