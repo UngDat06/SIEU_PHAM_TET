@@ -1150,71 +1150,50 @@ body {
     }
 }
 /* =========================================
-   MOBILE RESPONSIVE: PHIÊN BẢN NHỎ GỌN (COMPACT)
-   Giúp bao lì xì không che mất ảnh vệ tinh
+   MOBILE FIX: PHƯƠNG PHÁP SCALE (Thu nhỏ toàn bộ)
+   Dán đoạn này vào CUỐI CÙNG file style.css
 ========================================= */
 
 @media screen and (max-width: 768px) {
-    /* 1. Thu nhỏ bao lì xì cực mạnh (Chỉ còn khoảng 60% so với gốc) */
-    .luxury-envelope {
-        width: 130px !important;   /* Chiều ngang nhỏ gọn */
-        height: 190px !important;  /* Chiều cao vừa đủ */
-        border-width: 1px !important; /* Viền mỏng cho thanh thoát */
+    /* 1. Thu nhỏ toàn bộ bao lì xì bằng Scale */
+    #final-envelope {
+        /* Thu nhỏ còn 60% so với kích thước gốc */
+        transform: scale(0.6) !important;
+        transform-origin: center center !important;
+        
+        /* Đảm bảo nó nằm giữa */
+        margin: 0 auto !important;
     }
 
-    /* 2. Chỉnh lại nắp bao cho cân đối với kích thước mới */
-    .luxury-envelope .luxury-flap {
-        height: 40% !important; /* Nắp ngắn lại chút */
-        border-top-width: 2px !important;
+    /* 2. Điều chỉnh container chứa nó */
+    #final-envelope-container {
+        width: 100% !important;
+        height: 100% !important;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
     }
 
-    /* 3. Con dấu (Seal) bé xíu lại */
-    .gold-seal {
-        width: 45px !important;
-        height: 45px !important;
-        top: 38% !important; /* Đẩy xuống một chút cho cân */
-        border-width: 1px !important;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.3) !important;
-    }
-
-    /* Chữ "Tết" trong con dấu */
-    .gold-seal::before {
-        font-size: 0.9rem !important; /* Chữ nhỏ xíu */
-    }
-
-    /* 4. Khu vực chữ trang trí (Band) */
-    .decorative-band {
-        height: 50px !important;
-        width: 90% !important;
-        margin-bottom: 15px !important;
-        background: linear-gradient(to right, transparent, rgba(139, 0, 0, 0.8), transparent) !important;
-    }
-
-    /* 5. Chữ "Phát Tài" hoặc "Xuân 2026" */
-    .decorative-text {
-        font-size: 1.2rem !important; /* Chữ vừa vặn với khung 130px */
-        letter-spacing: 1px !important;
-        white-space: nowrap; /* Cấm xuống dòng */
-    }
-
-    /* 6. Dòng gợi ý "(Nhấn để nhận lộc)" */
-    .click-hint {
-        font-size: 0.6rem !important; /* Nhỏ li ti nhưng vẫn đọc được */
-        margin-top: 5px !important;
-    }
-    
-    /* 7. QUAN TRỌNG: Điều chỉnh lại tâm sân khấu để mọi thứ không bị zoom quá to */
-    #center-stage {
-        /* Thu nhỏ toàn bộ cụm (bao gồm cả ảnh vệ tinh) một chút xíu 
-           để đảm bảo không bị tràn màn hình */
-        transform: translate(-50%, -50%) scale(0.95) !important;
-    }
-    
-    /* 8. Thu nhỏ các vệ tinh (ảnh xoay) một chút nếu chúng quá to */
+    /* 3. Đẩy các ảnh vệ tinh (ảnh mẹ và bà) ra xa hơn */
+    /* Vì bao lì xì nhỏ lại, ta cần đẩy ảnh ra để không bị dính chùm */
     .satellite-item {
-        width: 80px !important;  /* Ảnh nhỏ lại chút (Gốc là 100px) */
-        height: 80px !important;
-        margin-left: -40px !important; /* Căn giữa lại (bằng 1 nửa width) */
-        margin-top: -40px !important;
+        /* Giữ kích thước ảnh nhỏ gọn */
+        width: 70px !important;
+        height: 70px !important;
+        margin-left: -35px !important;
+        margin-top: -35px !important;
+    }
+    
+    /* 4. Tinh chỉnh riêng cho chữ gợi ý bấm (vì scale nhỏ quá có thể khó đọc) */
+    .click-hint {
+        font-size: 1.2rem !important; /* Tăng size gốc lên để khi scale 0.6 vẫn đọc được */
+        font-weight: bold !important;
+    }
+    
+    /* 5. Ẩn bớt hiệu ứng hào quang nếu nó che mất ảnh */
+    .halo-ring {
+        width: 250px !important;
+        height: 250px !important;
+        opacity: 0.5 !important;
     }
 }

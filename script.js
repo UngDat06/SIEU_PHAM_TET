@@ -215,7 +215,7 @@ function checkUserInDatabase() {
             currentImages = []; // Không có ảnh kỷ niệm
             
             // Avatar Thần Tài mặc định
-            document.getElementById('final-avatar').src = "Image\anhthantai.jpg";
+            document.getElementById('final-avatar').src = "Image/anhthantai.jpg";
             // QR mặc định
             document.getElementById('final-qr').src = "Image/grandfather/QR.png"; 
 
