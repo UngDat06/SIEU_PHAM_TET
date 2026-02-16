@@ -10,7 +10,7 @@ const brothersInVillage = {
 
 const contentDatabase = {
     "Mother": {
-        music: "Music/tetme.mp3",
+        music: "Music/me.mp3",
         images: [
             { url: 'Image/mom/0.jpg', caption: 'Mẹ tôi đó' },
             { url: 'Image/mom/1.jpg', caption: 'Yêu đời' },
@@ -21,9 +21,11 @@ const contentDatabase = {
             { url: 'Image/mom/6.jpg', caption: 'Mẹ đang khóc nhè nè' },
             { url: 'Image/mom/7.jpg', caption: 'My family' },
             { url: 'Image/mom/8.jpg', caption: 'Sinh nhật mẹ iu' },
-            { url: 'Image/mom/0.jpg', caption: 'Mẹ yêu' },
-            { url: 'Image/mom/0.jpg', caption: 'Mẹ yêu' },
-            { url: 'Image/mom/0.jpg', caption: 'Mẹ yêu' },
+            { url: 'Image/mom/9.jpg', caption: 'Mẹ và các bác trong tà áo dài' },
+            { url: 'Image/mom/10.jpg', caption: 'Mẹ bên bà ngoại nè' },
+            { url: 'Image/mom/13.jpg', caption: 'Mẹ hóa thân thành dân tộc nè' },
+            { url: 'Image/mom/11.jpg', caption: 'Kỉ niệm sum vầy bên bà' },
+            { url: 'Image/mom/12.jpg', caption: 'Hai mẹ con cười giống hệt nhau' },
            
         ],
         wishTemplate: "Chúc mẹ {name} bước sang tuổi {age} luôn mạnh khỏe, vui vẻ bên con cháu. Cảm ơn mẹ đã luôn là chỗ dựa vững chắc cho con!"
@@ -213,7 +215,7 @@ function checkUserInDatabase() {
             currentImages = []; // Không có ảnh kỷ niệm
             
             // Avatar Thần Tài mặc định
-            document.getElementById('final-avatar').src = "https://cdn-icons-png.flaticon.com/512/4305/4305542.png";
+            document.getElementById('final-avatar').src = "Image\anhthantai.jpg";
             // QR mặc định
             document.getElementById('final-qr').src = "Image/grandfather/QR.png"; 
 

@@ -1150,64 +1150,71 @@ body {
     }
 }
 /* =========================================
-   BỔ SUNG RESPONSIVE CHO ĐIỆN THOẠI (MOBILE)
-   Đặt đoạn này ở CUỐI CÙNG file CSS
+   MOBILE RESPONSIVE: PHIÊN BẢN NHỎ GỌN (COMPACT)
+   Giúp bao lì xì không che mất ảnh vệ tinh
 ========================================= */
 
 @media screen and (max-width: 768px) {
-    /* 1. Thu nhỏ kích thước tổng thể của phong bao */
+    /* 1. Thu nhỏ bao lì xì cực mạnh (Chỉ còn khoảng 60% so với gốc) */
     .luxury-envelope {
-        /* Kích thước cũ: 220px x 320px */
-        /* Kích thước mới trên mobile (giảm khoảng 30%) */
-        width: 160px !important;
-        height: 235px !important;
+        width: 130px !important;   /* Chiều ngang nhỏ gọn */
+        height: 190px !important;  /* Chiều cao vừa đủ */
+        border-width: 1px !important; /* Viền mỏng cho thanh thoát */
     }
 
-    /* 2. Thu nhỏ con dấu (Seal) bên trong */
+    /* 2. Chỉnh lại nắp bao cho cân đối với kích thước mới */
+    .luxury-envelope .luxury-flap {
+        height: 40% !important; /* Nắp ngắn lại chút */
+        border-top-width: 2px !important;
+    }
+
+    /* 3. Con dấu (Seal) bé xíu lại */
     .gold-seal {
-        width: 50px !important;  /* Cũ: 70px */
-        height: 50px !important; /* Cũ: 70px */
-        top: 35% !important;     /* Điều chỉnh vị trí một chút */
+        width: 45px !important;
+        height: 45px !important;
+        top: 38% !important; /* Đẩy xuống một chút cho cân */
+        border-width: 1px !important;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.3) !important;
     }
 
-    /* Thu nhỏ chữ "Tết" trong con dấu */
+    /* Chữ "Tết" trong con dấu */
     .gold-seal::before {
-        font-size: 1.2rem !important; /* Cũ: 1.8rem */
+        font-size: 0.9rem !important; /* Chữ nhỏ xíu */
     }
 
-    /* 3. Thu nhỏ khu vực chữ trang trí (Decorative Band) */
+    /* 4. Khu vực chữ trang trí (Band) */
     .decorative-band {
-        height: 90px !important;   /* Cũ: 140px */
-        width: 80% !important;     /* Rộng hơn một chút so với khung bao nhỏ */
+        height: 50px !important;
+        width: 90% !important;
         margin-bottom: 15px !important;
+        background: linear-gradient(to right, transparent, rgba(139, 0, 0, 0.8), transparent) !important;
     }
 
-    /* 4. Thu nhỏ chữ to (Ví dụ: Xuân 2026 hoặc Phát Tài) */
+    /* 5. Chữ "Phát Tài" hoặc "Xuân 2026" */
     .decorative-text {
-        font-size: 1.5rem !important; /* Cũ: 2.5rem hoặc 3rem */
-        letter-spacing: 1px !important; /* Giảm khoảng cách chữ */
-    }
-
-    /* Xử lý riêng cho chữ "Phát Tài" ở bao cuối nếu cần */
-    #final-envelope .decorative-text {
-         /* Đảm bảo nó không bị tràn ra ngoài trên màn hình bé */
-         white-space: nowrap;
-         transform: scale(0.9); /* Thu nhỏ nhẹ nếu vẫn to */
-    }
-
-    /* 5. Thu nhỏ dòng chữ gợi ý bấm */
-    .click-hint,
-    .envelope-face > div[style*="font-size: 0.9rem"] {
-        font-size: 0.7rem !important; /* Cũ: 0.9rem */
+        font-size: 1.2rem !important; /* Chữ vừa vặn với khung 130px */
         letter-spacing: 1px !important;
+        white-space: nowrap; /* Cấm xuống dòng */
     }
 
-    /* 6. (Tùy chọn) Tăng khoảng cách vòng xoay ảnh trên mobile
-       Nếu sau khi thu nhỏ bao lì xì mà ảnh vẫn bị sát quá,
-       hãy bỏ comment (xóa dấu gạch chéo sao) dòng dưới để đẩy ảnh ra xa hơn */
-    /*
-    #center-stage {
-        transform: translate(-50%, -50%) scale(1.1);
+    /* 6. Dòng gợi ý "(Nhấn để nhận lộc)" */
+    .click-hint {
+        font-size: 0.6rem !important; /* Nhỏ li ti nhưng vẫn đọc được */
+        margin-top: 5px !important;
     }
-    */
+    
+    /* 7. QUAN TRỌNG: Điều chỉnh lại tâm sân khấu để mọi thứ không bị zoom quá to */
+    #center-stage {
+        /* Thu nhỏ toàn bộ cụm (bao gồm cả ảnh vệ tinh) một chút xíu 
+           để đảm bảo không bị tràn màn hình */
+        transform: translate(-50%, -50%) scale(0.95) !important;
+    }
+    
+    /* 8. Thu nhỏ các vệ tinh (ảnh xoay) một chút nếu chúng quá to */
+    .satellite-item {
+        width: 80px !important;  /* Ảnh nhỏ lại chút (Gốc là 100px) */
+        height: 80px !important;
+        margin-left: -40px !important; /* Căn giữa lại (bằng 1 nửa width) */
+        margin-top: -40px !important;
+    }
 }
