@@ -5,7 +5,7 @@ const brothersInVillage = {
     "Cường": "Chúc ô a Cường năm mới thật nhiều sức khỏe, tiền vào như nước sông đà, chảy ra như giọt cafe phin.Chúc anh có 1 năm mới thật rực rỡ như hành trình của e nè haha.Mong rằng anh em ta sẽ có 1 năm mới thật nhiều kỉ niệm đẹp bên nhau!",
     "Hải": "Năm mới a chúc Hải 'Chân cứng đá mềm', biến những trải nghiệm trường đời sớm thành vốn sống quý giá. Tết là để về nhà, mong năm nay công việc hanh thông, ví dày, tâm an, để mỗi lần tụ họp vẫn luôn cười tươi rói nhé.Mong rằng anh em ta năm mới sẽ có thật nhiều kỉ niệm bên nhau!",
     "Hoàng": "Chúc Hoàng năm mới rực rỡ. 18 tuổi, người ta còn lo trang sách, em đã lo được nồi cơm, cái bản lĩnh ấy anh nể. Nhưng IT là đường đua khắc nghiệt, chúc em năm nay:Tối ưu hóa cuộc sống. Không có bằng cấp thì mình phải dùng đẳng cấp để nói chuyện. Kiếm tiền giỏi rồi, giờ nhớ giữ gìn sức khỏe và nâng cấp bản thân liên tục để không bao giờ bị tụt hậu nhé.Mong rằng anh em ta sang năm mới sẽ có thật nhiều kỉ niệm đáng nhớ trong năm mới!",
-    "Hưng": "Năm mới Tết đến, tao trân trọng đề nghị mày năm nay bớt 'ngáo', bớt 'báo' lại giùm tao cái. Chúc mày năm 2026 nhan sắc thăng hạng (để sớm lừa được em nào về ra mắt mẹ), tài khoản thì lúc nào cũng ting ting (để tao còn vay nóng lúc cần).Đi làm thì mong mày gặp được sếp hiền như Bụt, đồng nghiệp như tiên, deadline thì tự nhiên biến mất. Ra đường thì xe cộ cẩn thận, đừng có phóng nhanh vượt ẩu rồi lại báo gia đình. Nhậu nhẹt thì uống vừa thôi, gan ruột nó cũng có hạn sử dụng đấy con ạ.Chốt lại: Chúc mày năm mới 8386 (phát tài phát lộc), sớm thành đại gia để bao tao đi massage xông hơi. Happy New Year tml (thằng mặt lợn)!"
+    "Anh": "Chúc mừng năm mới người em hàng xóm-cu B! Năm qua thấy chú mày 'lột xác' thành thanh niên nghiêm túc rồi đấy, tiếp tục phát huy nhé. Năm mới a chúc sức khỏe vô biên để còn cày cuốc. Học hành thì cứ tự tin lên, bài nào khó quá thì mang sang đây... anh nhìn hộ rồi anh cổ vũ cho, chứ anh cũng 'gà' lắm. Đùa thôi, cần gì cứ hỏi, anh hỗ trợ hết mình!Thôi thì cũng lớn rồi sớm có gấu để mùa đông không lạnh nha e hihi.Tới đây thôi được rồi chúc năm mới vui vẻ nha e zai của a haha"
 };
 
 const contentDatabase = {
@@ -75,7 +75,6 @@ const contentDatabase = {
             { url: 'Image/brother_stress/anhdangdayhoc.jpg', caption: 'Học hành' },
             { url: 'Image/brother_stress/an1.jpg', caption: 'Lẩu Nóng' },
             { url: 'Image/brother_stress/an2.jpg', caption: 'Quẩy' },
-            { url: 'Image/brother_stress/an3.jpg', caption: 'Anh em mãi đỉnh' },
             { url: 'Image/brother_stress/an4.jpg', caption: 'No Say' },
             { url: 'Image/brother_stress/anh5.jpg', caption: 'Sinh nhật bạn Huy' },
             { url: 'Image/brother_stress/anh8.jpg', caption: 'Đi tìm bình yên' },
